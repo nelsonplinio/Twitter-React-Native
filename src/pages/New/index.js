@@ -1,24 +1,38 @@
-import React, {useEffect} from 'react';
-import {Container, TweetText} from './styles';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import TweetButton from '../../components/TweetButton';
-import Colors from '../../theme/colors';
 import UserImage from '../../components/UserImage';
+import * as TweetActions from '../../store/actions/tweet';
+import Colors from '../../theme/colors';
+import {Container, TweetText} from './styles';
 
-export default function New({navigation}) {
-  // useEffect(() => {
-  //   navigation.setParams({createNewTweet});
-  // }, []);
+function New({navigation, user, newTweet, tweets}) {
+  const [tweetMsg, setTweetMsg] = useState('');
 
-  // function createNewTweet() {
-  //   console.log('createNewTweet');
-  // }
+  useEffect(() => {
+    navigation.setParams({createNewTweet, disabled: tweetMsg.length === 0});
+  }, [tweetMsg]);
+
+  function createNewTweet() {
+    const tweet = {
+      from: user,
+      id: tweets.length + 1,
+
+      message: tweetMsg,
+      timestamp: new Date(),
+      comments: 0,
+      retweets: 0,
+      likes: 0,
+    };
+
+    newTweet(tweet);
+    navigation.goBack();
+  }
 
   return (
     <Container>
-      <UserImage
-        size={55}
-        uri="https://avatars3.githubusercontent.com/u/14140891?s=120&v=4"
-      />
+      <UserImage size={55} uri={user.photoUrl} />
       <TweetText
         placeholder="What´s happening?"
         maxLength={140}
@@ -26,6 +40,8 @@ export default function New({navigation}) {
         autoFocus={true}
         autoCapitalize="sentences"
         multiline
+        value={tweetMsg}
+        onChangeText={setTweetMsg}
       />
     </Container>
   );
@@ -41,3 +57,13 @@ export function navigationOptions(props) {
     headerRight: <TweetButton {...props} />,
   };
 }
+
+const mapStateToProps = ({user, tweets}) => ({
+  user,
+  tweets,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(TweetActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(New);

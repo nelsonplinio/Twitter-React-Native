@@ -63,13 +63,13 @@ export const FooterContainer = styled.View`
   flex-direction: row;
   padding: 4px 0;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around;
 `;
 
 export const CounterButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   /* height: ${width * 0.05}px; */
   flex: 1;
 `;
