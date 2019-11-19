@@ -43,6 +43,7 @@ export const UserName = styled.Text`
   color: ${Colors.primaryTextColor};
   font-weight: bold;
   margin-right: 4px;
+  flex: 1;
 `;
 
 export const TagName = styled.Text`

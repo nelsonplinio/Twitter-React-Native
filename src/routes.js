@@ -72,6 +72,9 @@ const stackNav = createStackNavigator(
           backgroundColor: Colors.background,
         },
         headerTitle: 'Home',
+        headerTitleStyle: {
+          flex: 1,
+        },
         headerTintColor: Colors.primaryTextColor,
         headerLeft: () => (
           <UserImage uri="https://avatars3.githubusercontent.com/u/14140891?s=120&v=4" />
@@ -83,7 +86,11 @@ const stackNav = createStackNavigator(
       navigationOptions: newTweetNavOpts,
     },
   },
-  {},
+  {
+    navigationOptions: {
+      backgroundColor: Colors.background,
+    },
+  },
 );
 
 const routes = createAppContainer(stackNav);
