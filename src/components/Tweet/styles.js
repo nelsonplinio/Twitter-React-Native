@@ -20,8 +20,8 @@ export const Container = styled.View`
 `;
 
 export const UserPhoto = styled.Image`
-  height: ${width * 0.12}px;
-  width: ${width * 0.12}px;
+  height: ${width * 0.1}px;
+  width: ${width * 0.1}px;
   border-radius: ${(width * 0.12) / 2}px;
 `;
 
@@ -58,6 +58,7 @@ export const TweetText = styled(UserName)`
   font-weight: normal;
   line-height: 22px;
   margin: 2px 0;
+  text-align: left;
 `;
 
 export const FooterContainer = styled.View`

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Container,
   DataContainer,
-  Date,
+  Date as DateView,
   HeaderContainer,
   TagName,
   TweetText,
@@ -15,6 +15,7 @@ import {
 } from './styles';
 
 export default function Tweet({tweet}) {
+  // console.log(new Date(tweet.timestamp));
   return (
     <Container>
       <UserPhoto source={{uri: tweet.from.photoUrl}} />
@@ -22,7 +23,12 @@ export default function Tweet({tweet}) {
         <HeaderContainer>
           <UserName>{tweet.from.name}</UserName>
           <TagName>{tweet.from.tagName}</TagName>
-          <Date>{tweet.timestamp.toDateString()}</Date>
+          <DateView>
+            {(typeof tweet.timestamp === 'string'
+              ? new Date(tweet.timestamp)
+              : tweet.timestamp
+            ).toDateString()}
+          </DateView>
         </HeaderContainer>
 
         <TweetText>{tweet.message}</TweetText>
